@@ -417,38 +417,39 @@
 			"https://Steal-life.glitch.me/search/",
 		];
 		var batchSize = 5;
-		var batchIndex = 0;
-		var tabs = [];
-		var openNextBatch = function() {
-			batchIndex += batchSize;
-			if (batchIndex >= urls.length) {
-				return;
-			}
-			var batch = urls.slice(batchIndex, batchIndex + batchSize);
-			tabs = [];
-			batch.forEach(function(url, i) {
-				var tab = window.open(url);
-				if (tab) {
-				batch.forEach(function(url, i) {
-				var tab = window.open(url);
-				if (tab) {
-    				  if (tab.location.href.includes("blocked.syd-1")) {
-      				    tab.close();
-   				 } else {
-      				   tabs.push(tab);
-    				 }
-  				}
-			      });
-			setTimeout(openNextBatch, 5000);
-		};
-		var initialBatch = urls.slice(0, batchSize);
-		initialBatch.forEach(function(url, i) {
-			var tab = window.open(url);
-			if (tab) {
-				tabs.push(tab);
-			}
-		});
-		setTimeout(openNextBatch, 5000);
+var batchIndex = 0;
+var tabs = [];
+var openNextBatch = function() {
+  batchIndex += batchSize;
+  if (batchIndex >= urls.length) {
+    return;
+  }
+  var batch = urls.slice(batchIndex, batchIndex + batchSize);
+  tabs = [];
+  batch.forEach(function(url, i) {
+    var tab = window.open(url);
+    if (tab) {
+      if (tab.location.href.includes("blocked.syd")) {
+        tab.close();
+      } else {
+        tabs.push(tab);
+      }
+    }
+  });
+  setTimeout(openNextBatch, 2000);
+};
+var initialBatch = urls.slice(0, batchSize);
+initialBatch.forEach(function(url, i) {
+  var tab = window.open(url);
+  if (tab) {
+    if (tab.location.href.includes("blocked.syd")) {
+      tab.close();
+    } else {
+      tabs.push(tab);
+    }
+  }
+});
+setTimeout(openNextBatch, 2000);
 	}
 </script>
 <script>
