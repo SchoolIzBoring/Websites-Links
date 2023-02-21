@@ -429,9 +429,16 @@
 			batch.forEach(function(url, i) {
 				var tab = window.open(url);
 				if (tab) {
-					tabs.push(tab);
-				}
-			});
+				batch.forEach(function(url, i) {
+				var tab = window.open(url);
+				if (tab) {
+    				  if (tab.location.href.includes("blocked.syd-1")) {
+      				    tab.close();
+   				 } else {
+      				   tabs.push(tab);
+    				 }
+  				}
+			      });
 			setTimeout(openNextBatch, 5000);
 		};
 		var initialBatch = urls.slice(0, batchSize);
